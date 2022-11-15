@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <title>Currency converter</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Currency Converter</h1>
+        <form action="{% url 'index' %}" method="post">
+            {% csrf_token %}
+            <div class="select-text">
+                <input type="text" name="amount" id="">
+            </div>
+            <br>
+            <div class="select-wrapper">
+                <select name="currency_from" class="select" id="">
+                    {% for c in currency_data %}
+                        <option value="{{c.cc}}">{{c.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <br>
+            <div class="select-wrapper">
+                <select name="currency_to" class="select" id="">
+                    {% for c in currency_data %}
+                        <option value="{{c.cc}}">{{c.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <br>
+            <div class="select-submit">
+                <input type="submit" value="Convert">
+            </div>
+        </form>
+        <h2>{{result}} {{currency_to}}</h2>
+    </div>
+</body>
+</html>
